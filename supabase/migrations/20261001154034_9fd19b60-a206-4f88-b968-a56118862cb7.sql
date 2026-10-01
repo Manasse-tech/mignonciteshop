@@ -1,0 +1,1 @@
+revoke execute on function public.documents_guard() from public, anon, authenticated;
