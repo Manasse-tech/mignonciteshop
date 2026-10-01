@@ -34,7 +34,7 @@ export interface AnalyticsPayload {
   [key: string]: string | number | boolean | null | undefined;
 }
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = import.meta.env.DEV;
 
 function send(event: AnalyticsEvent, payload: AnalyticsPayload = {}): void {
   const { page, productId, value, ...rest } = payload as {
