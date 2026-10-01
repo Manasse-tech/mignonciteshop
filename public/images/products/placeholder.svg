@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#F5F0E6"/>
+  <rect x="160" y="150" width="80" height="80" rx="16" fill="none" stroke="#C9A961" stroke-width="3"/>
+  <circle cx="200" cy="180" r="12" fill="#C9A961"/>
+  <path d="M168 222 L192 198 L208 214 L224 194 L240 222" fill="none" stroke="#C9A961" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#8A7A5A">MignonciteShop</text>
+</svg>
