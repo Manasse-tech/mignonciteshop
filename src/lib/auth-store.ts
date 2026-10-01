@@ -23,13 +23,13 @@ import {
   GoogleAuthProvider,
   updateProfile,
   type User as FirebaseUser,
-} from "firebase/auth";
+} from "@/lib/fb/auth";
 import {
   doc,
   getDoc,
   serverTimestamp,
   setDoc,
-} from "firebase/firestore";
+} from "@/lib/fb/firestore";
 import { fbAuth, fbDb, friendlyFirebaseError } from "@/lib/firebase";
 
 export interface AuthUser {

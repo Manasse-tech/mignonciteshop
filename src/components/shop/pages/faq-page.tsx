@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/next-navigation";
 import type { LucideIcon } from "lucide-react";
 import {
   MessageCircle,

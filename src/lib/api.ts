@@ -28,8 +28,8 @@ import {
   deleteDoc,
   updateDoc,
   Timestamp,
-} from "firebase/firestore";
-import { deleteUser, type User as FirebaseUser } from "firebase/auth";
+} from "@/lib/fb/firestore";
+import { deleteUser, type User as FirebaseUser } from "@/lib/fb/auth";
 import { fbAuth, fbDb, friendlyFirebaseError } from "@/lib/firebase";
 import { useAuthStore } from "@/lib/auth-store";
 import { computePromo as computePromoLocal, PROMO_CODES } from "@/lib/promos";

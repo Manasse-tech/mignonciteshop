@@ -7,7 +7,7 @@ import {
   useSyncExternalStore,
   type FormEvent,
 } from "react";
-import dynamic from "next/dynamic";
+import dynamic from "@/lib/next-dynamic";
 import {
   Bell,
   ChartLine,

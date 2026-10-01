@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/next-navigation";
 import { Eye, EyeOff, Lock, Shield } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/next-navigation";
 import { toast } from "sonner";
 import { Loader2, Lock } from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";

@@ -12,7 +12,7 @@
  * intacte (les erreurs sont silencieuses).
  */
 
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "@/lib/fb/firestore";
 import { fbDb } from "@/lib/firebase";
 
 export type AnalyticsEvent =

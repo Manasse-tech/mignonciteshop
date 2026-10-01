@@ -9,7 +9,7 @@ import {
   orderBy,
   query,
   where,
-} from "firebase/firestore";
+} from "@/lib/fb/firestore";
 import { fbDb } from "@/lib/firebase";
 import { api } from "@/lib/api";
 import type { Category, Product } from "@/lib/types";
