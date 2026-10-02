@@ -7,7 +7,8 @@
  */
 import { supabase } from "@/integrations/supabase/client";
 
-type Data = Record<string, unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Data = Record<string, any>;
 
 export interface Firestore {
   readonly type: "firestore";
@@ -181,7 +182,8 @@ export interface DocumentSnapshot {
   id: string;
   ref: DocumentReference;
   exists(): boolean;
-  data(): Data | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data(): any;
 }
 export type QueryDocumentSnapshot = DocumentSnapshot & { data(): Data };
 
