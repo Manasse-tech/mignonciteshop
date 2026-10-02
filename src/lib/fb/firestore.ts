@@ -410,6 +410,16 @@ export async function runTransaction<T>(
 let channelSeq = 0;
 
 export function onSnapshot(
+  target: DocumentReference,
+  next: (snap: DocumentSnapshot) => void,
+  onError?: (e: unknown) => void
+): () => void;
+export function onSnapshot(
+  target: Query | CollectionReference,
+  next: (snap: QuerySnapshot) => void,
+  onError?: (e: unknown) => void
+): () => void;
+export function onSnapshot(
   target: Query | CollectionReference | DocumentReference,
   next: (snap: never) => void,
   onError?: (e: unknown) => void
