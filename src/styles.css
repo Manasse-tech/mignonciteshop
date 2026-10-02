@@ -355,7 +355,7 @@
 }
 @layer base {
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: var(--font-sans); letter-spacing: -0.005em; }
+  body { font-family: var(--font-sans); }
   h1, h2, h3 { letter-spacing: -0.02em; text-wrap: balance; }
   h1, h2 { font-family: var(--font-display); font-weight: 600; }
   p { text-wrap: pretty; }
