@@ -381,6 +381,13 @@ export function AccountPage({ onNavigate }: { onNavigate: (page: string) => void
             <h2 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <Package className="w-5 h-5 text-[#C9A961]" aria-hidden="true" />
               Mes commandes
+              <button
+                type="button"
+                onClick={() => onNavigate("orders")}
+                className="ml-auto text-xs font-semibold text-[#C9A961] hover:underline"
+              >
+                Suivi détaillé →
+              </button>
             </h2>
 
             {orders === null ? (

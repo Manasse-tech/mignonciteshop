@@ -65,6 +65,8 @@ export type PageKey =
   | "privacy"
   | "legal"
   | "admin"
+  | "orders"
+  | "compare"
   | "404";
 
 export const GOLD = "#C9A961";
