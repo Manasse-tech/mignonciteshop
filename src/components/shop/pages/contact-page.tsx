@@ -7,14 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const CONTACT_ITEMS = [
-  { icon: Mail, label: "Email", value: "contact@mignonciteshop.com" },
-  { icon: Phone, label: "Téléphone", value: "+33 1 23 45 67 89" },
-  { icon: MapPin, label: "Adresse", value: "Paris, France" },
-  { icon: Clock, label: "Horaires", value: "Lun-Ven : 9h-18h" },
-] as const;
+import { useContactSettings } from "@/lib/contact-settings";
 
 export function ContactPage() {
+  const contact = useContactSettings();
+  const CONTACT_ITEMS = [
+    { icon: Mail, label: "Email", value: contact.email },
+    { icon: Phone, label: "Téléphone", value: contact.phone },
+    { icon: MapPin, label: "Adresse", value: contact.address },
+    { icon: Clock, label: "Horaires", value: contact.hours },
+  ];
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");

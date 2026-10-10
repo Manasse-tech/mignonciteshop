@@ -31,6 +31,8 @@ import { TrackingPage } from "@/components/shop/pages/tracking-page";
 import { CgvPage } from "@/components/shop/pages/cgv-page";
 import { PrivacyPage } from "@/components/shop/pages/privacy-page";
 import { LegalPage } from "@/components/shop/pages/legal-page";
+import { OrdersPage } from "@/components/shop/pages/orders-page";
+import { ComparePage, CompareBar } from "@/components/shop/pages/compare-page";
 import { trackPageView } from "@/lib/analytics";
 
 const PAGE_TITLES: Record<string, string> = {
@@ -52,6 +54,8 @@ const PAGE_TITLES: Record<string, string> = {
   privacy: "Confidentialité — MignonciteShop",
   legal: "Mentions légales — MignonciteShop",
   admin: "Administration — MignonciteShop",
+  orders: "Mes commandes — MignonciteShop",
+  compare: "Comparateur — MignonciteShop",
 };
 
 const KNOWN_PAGES = new Set(Object.keys(PAGE_TITLES));
@@ -264,6 +268,23 @@ function ShopApp() {
     case "legal":
       content = <LegalPage />;
       break;
+    case "orders":
+      content = (
+        <RequireAuth label="suivi de commandes">
+          <OrdersPage onNavigate={navigate} />
+        </RequireAuth>
+      );
+      break;
+    case "compare":
+      content = (
+        <ComparePage
+          products={products}
+          loading={loading}
+          onNavigate={navigate}
+          onOpenProduct={openProduct}
+        />
+      );
+      break;
     case "admin":
       content = <AdminPage onNavigate={navigate} />;
       break;
@@ -320,6 +341,7 @@ function ShopApp() {
         onSearch={() => setSearchOpen(true)}
       />
       <ScrollUi />
+      <CompareBar onNavigate={navigate} hidden={page === "compare" || page === "admin" || page === "checkout"} />
       <SearchDialog
         products={products}
         open={searchOpen}
