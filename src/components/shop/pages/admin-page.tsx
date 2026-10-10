@@ -42,6 +42,9 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { friendlyFirebaseError } from "@/lib/firebase";
+import { uploadShopImage } from "@/lib/image-upload";
+import { AiAssistantPanel } from "@/components/shop/admin/ai-assistant-panel";
+import { ContactPanel } from "@/components/shop/admin/contact-panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -181,11 +184,40 @@ function ImageUrlField({
     []
   );
   const [previewError, setPreviewError] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const url = value.trim();
 
   return (
     <div className="space-y-2">
-      <Label htmlFor={inputId}>{label}</Label>
+      <div className="flex items-center justify-between gap-2">
+        <Label htmlFor={inputId}>{label}</Label>
+        <label className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C9A961] cursor-pointer hover:underline">
+          {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" /> : <Plus className="w-3.5 h-3.5" aria-hidden="true" />}
+          {uploading ? "Import…" : "Importer une image"}
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={uploading}
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              e.target.value = "";
+              if (!file) return;
+              setUploading(true);
+              try {
+                const uploaded = await uploadShopImage(file);
+                setPreviewError(false);
+                onChange(uploaded);
+                toast.success("Image importée.");
+              } catch (err) {
+                toast.error(err instanceof Error ? err.message : "Import impossible.");
+              } finally {
+                setUploading(false);
+              }
+            }}
+          />
+        </label>
+      </div>
       <Input
         id={inputId}
         value={value}
@@ -233,7 +265,7 @@ function ImageUrlField({
         </div>
       ) : (
         <p className="text-xs text-muted-foreground">
-          Collez une URL d&apos;image publique (ex : https://exemple.com/photo.jpg).
+          Importez une image depuis votre appareil ou collez une URL publique.
         </p>
       )}
     </div>
@@ -331,6 +363,8 @@ const TABS = [
   { key: "reports", label: "Rapports" },
   { key: "audit", label: "Journal" },
   { key: "settings", label: "Paramètres" },
+  { key: "contact", label: "Coordonnées" },
+  { key: "assistant", label: "Assistant IA" },
 ] as const;
 
 type AdminTab = (typeof TABS)[number]["key"];
@@ -393,6 +427,8 @@ function AdminDashboard() {
         {tab === "reports" && <ReportsPanel refreshKey={refreshKey} />}
         {tab === "audit" && <AuditPanel refreshKey={refreshKey} />}
         {tab === "settings" && <SettingsPanel refreshKey={refreshKey} />}
+        {tab === "contact" && <ContactPanel />}
+        {tab === "assistant" && <AiAssistantPanel />}
       </div>
     </div>
   );

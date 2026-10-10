@@ -176,7 +176,7 @@ export function Footer({ onNavigate, onOpenCookies }: FooterProps) {
                   className="w-4 h-4 flex-shrink-0 text-[#C9A961]"
                   aria-hidden="true"
                 />
-                Paris, France
+                {contact.address}
               </li>
             </ul>
           </div>
