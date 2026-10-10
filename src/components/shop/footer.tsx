@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { api, ApiError } from "@/lib/api";
+import { useContactSettings } from "@/lib/contact-settings";
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -29,6 +30,7 @@ const HELP_LINKS: { label: string; page?: string }[] = [
 ];
 
 export function Footer({ onNavigate, onOpenCookies }: FooterProps) {
+  const contact = useContactSettings();
   const [email, setEmail] = useState("");
   const [subscribing, setSubscribing] = useState(false);
 
@@ -156,10 +158,10 @@ export function Footer({ onNavigate, onOpenCookies }: FooterProps) {
                   aria-hidden="true"
                 />
                 <a
-                  href="mailto:contact@mignonciteshop.com"
+                  href={`mailto:${contact.email}`}
                   className="hover:text-white transition-colors break-all"
                 >
-                  contact@mignonciteshop.com
+                  {contact.email}
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -167,7 +169,7 @@ export function Footer({ onNavigate, onOpenCookies }: FooterProps) {
                   className="w-4 h-4 flex-shrink-0 text-[#C9A961]"
                   aria-hidden="true"
                 />
-                +33 1 23 45 67 89
+                {contact.phone}
               </li>
               <li className="flex items-center gap-2">
                 <MapPin
