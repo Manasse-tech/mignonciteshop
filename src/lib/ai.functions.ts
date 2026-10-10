@@ -196,7 +196,7 @@ export const verifyMobileMoneyProof = createServerFn({ method: "POST" })
     if (error) throw new Error("Lecture de la commande impossible.");
     const row = rows?.[0];
     if (!row) throw new Error("Commande introuvable.");
-    const order = row.data as Record<string, unknown>;
+    const order = row.data as Record<string, string | number | boolean | null>;
     const owns =
       order.uid === context.userId ||
       (email && String(order.email ?? "").toLowerCase() === email);
@@ -313,7 +313,7 @@ export const verifyMobileMoneyProof = createServerFn({ method: "POST" })
       const next = {
         ...order,
         paymentStatus: "paid",
-        status: order.status === "pending" ? "confirmed" : order.status,
+        status: order.status === "pending" ? "confirmed" : String(order.status ?? "pending"),
         transactionId: extracted.transactionId,
         paymentProofPath: path,
         paymentVerifiedBy: "ai",
@@ -326,7 +326,7 @@ export const verifyMobileMoneyProof = createServerFn({ method: "POST" })
         .eq("collection", "orderLookups")
         .eq("data->>orderId", row.id);
       for (const l of lookups ?? []) {
-        const ld = l.data as Record<string, unknown>;
+        const ld = l.data as Record<string, string | number | boolean | null>;
         await supabaseAdmin
           .from("documents")
           .update({ data: { ...ld, paymentStatus: "paid", status: next.status, updatedAt: now } })
