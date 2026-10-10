@@ -1,5 +1,7 @@
 "use client";
 
+import { MobileMoneyProof } from "@/components/shop/mobile-money-proof";
+
 import {
   useEffect,
   useMemo,
@@ -1502,6 +1504,9 @@ function ConfirmationView({ order, onNavigate }: ConfirmationViewProps) {
                 </span>
               </p>
             )}
+            {order.paymentMethod === "mobile_money" && (
+              <MobileMoneyProof reference={order.reference} />
+            )}
           </div>
 
           <p className="text-sm text-muted-foreground mt-5 max-w-xl">
@@ -1519,7 +1524,7 @@ function ConfirmationView({ order, onNavigate }: ConfirmationViewProps) {
             </button>
             <button
               type="button"
-              onClick={() => onNavigate("tracking")}
+              onClick={() => onNavigate("orders")}
               className="inline-flex items-center justify-center gap-2 border border-border bg-card rounded-full px-8 py-3 font-semibold text-foreground hover:border-[#C9A961] hover:text-[#C9A961] transition-colors"
             >
               Suivre ma commande

@@ -45,7 +45,7 @@ export async function saveContactSettings(next: ContactSettings): Promise<void> 
     .eq("id", "public")
     .maybeSingle();
   if (readErr) throw readErr;
-  const merged = { ...((data?.data ?? {}) as Record<string, unknown>), contact: next };
+  const merged = JSON.parse(JSON.stringify({ ...((data?.data ?? {}) as Record<string, unknown>), contact: next }));
   const { error } = data
     ? await supabase.from("documents").update({ data: merged }).eq("collection", "settings").eq("id", "public")
     : await supabase.from("documents").insert({ collection: "settings", id: "public", data: merged });
